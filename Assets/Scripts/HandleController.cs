@@ -26,11 +26,13 @@ public class HandleController : MonoBehaviour
 
 	void OnMouseDown()
 	{
+       
 		Debug.Log ("Spinning To Winning!");
 		animation.Play ();
-		foreach (ReelController reel in reels) {
-			reel.rotating = true;
-		}
+        foreach (ReelController reel in reels)
+        {
+            reel.rotating = true;
+        }
 		curReel = 0;
 
 	}
