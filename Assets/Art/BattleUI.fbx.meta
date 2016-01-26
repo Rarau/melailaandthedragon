@@ -15,6 +15,7 @@ ModelImporter:
     100014: Reel02
     100016: Reel03
     100018: SettingButton
+    100020: Case
     400000: //RootNode
     400002: Handle
     400004: HP_BAR
@@ -25,6 +26,7 @@ ModelImporter:
     400014: Reel02
     400016: Reel03
     400018: SettingButton
+    400020: Case
     2300000: Handle
     2300002: HP_BAR
     2300004: ItemButton
@@ -34,6 +36,7 @@ ModelImporter:
     2300012: Reel02
     2300014: Reel03
     2300016: SettingButton
+    2300018: Case
     3300000: Handle
     3300002: HP_BAR
     3300004: ItemButton
@@ -43,6 +46,7 @@ ModelImporter:
     3300012: Reel02
     3300014: Reel03
     3300016: SettingButton
+    3300018: Case
     4300000: HP_BAR
     4300002: MapButton
     4300004: SettingButton
@@ -52,6 +56,7 @@ ModelImporter:
     4300012: Handle
     4300014: Reel03
     4300016: Panel
+    4300018: Case
   materials:
     importMaterials: 1
     materialName: 0
