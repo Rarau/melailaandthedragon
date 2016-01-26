@@ -28,7 +28,7 @@ public class ButtonController : MonoBehaviour {
 
         }
 
-        if (gameObject)
+       
 
 
 	}
