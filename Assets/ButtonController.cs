@@ -19,8 +19,9 @@ public class ButtonController : MonoBehaviour {
 	void Update ()
     {
         HandleController HandleScript = FindObjectOfType<HandleController>();
+        ReelController ReelScript = FindObjectOfType<ReelController>();
         ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out rayHit,100.0f) && Input.GetMouseButtonDown(0))
+        if (Physics.Raycast(ray, out rayHit,100.0f) && Input.GetMouseButtonDown(0) /*&& ReelScript.rotating == true*/)
         {
             for (int i = 0; i < buttons.Length; i++)
             {

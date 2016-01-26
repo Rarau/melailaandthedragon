@@ -23,6 +23,8 @@ public class ReelController : MonoBehaviour
 
 	public void Rotate(int iconNumber)
 	{
+        if (!rotating)
+            return;
 		finalAngle = (360.0f / numIcons) * iconNumber + 0.25f * (360.0f / numIcons);
 		transform.localRotation = initRot;
 		transform.localPosition = Vector3.zero;
