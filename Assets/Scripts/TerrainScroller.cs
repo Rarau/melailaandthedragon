@@ -16,7 +16,7 @@ public class TerrainScroller : MonoBehaviour {
 	void Update () {
         offSet = Time.time * scrollSpeed;
         LeftWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
-        RightWall.material.SetTextureOffset("_MainTex", new Vector2(-offSet, 0));
-        Floor.material.SetTextureOffset("_MainTex", new Vector2(0,-offSet));
+        RightWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+        Floor.material.SetTextureOffset("_MainTex", new Vector2(offSet,0));
     }
 }
