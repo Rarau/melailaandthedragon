@@ -841,10 +841,14 @@ ModelImporter:
     2300002: Eye_L
     2300004: Eye_R
     2300006: Up_teeth
+    2300008: Eye_L 1
+    2300010: Eye_R 1
     3300000: Down_teeth
     3300002: Eye_L
     3300004: Eye_R
     3300006: Up_teeth
+    3300008: Eye_L 1
+    3300010: Eye_R 1
     4300000: SeaDragon
     4300002: Up_teeth
     4300004: Eye_L
