@@ -9,6 +9,8 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
     public event Action deadEvent;
     public event Action<float> attackEvent;
 
+    public Animation attackAnimation;
+
     public float hp = 100.0f;
 
 
@@ -26,25 +28,42 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 
     public void StartTurn()
     {
+        Debug.Log("Player turn started");
+
         slotMachine.enabled = true;
     }
 
     public void OnSlotMachineReelsStopped(SlotMachineResult reelsResult)
     {
         Debug.Log("Reels stopped player");
-        for (int i = 0; i < reelsResult.numAttacks; ++i)
-        {            
-            // TO-DO: ACtually parse reel data and attack or heal as stablished
-            if (attackEvent != null)
-                attackEvent(10.0f);
+        StartCoroutine(DoAttacks(3));
+
+
+    }
+
+    IEnumerator DoAttacks(int numAttacks)
+    {
+        Debug.Log("Player attacked once");
+
+        for (int i = 0; i < numAttacks; ++i)
+        {
+            // TO-DO: ACtually parse reelsResult data and attack or heal as stablished
+            attackAnimation.Rewind();
+            attackAnimation.Stop();
+            yield return StartCoroutine(attackAnimation.WhilePlaying(() => 
+            {
+                if (attackEvent != null)
+                    attackEvent(10.0f);
+                Debug.Log("Player attacked once");
+            }));
         }
+
         if (turnEndedEvent != null)
         {
+            slotMachine.enabled = false;
             turnEndedEvent();
         }
     }
-
-
 
     public void ReceiveAttack(float damage)
     {

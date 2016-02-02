@@ -23,11 +23,20 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
 
     public void StartTurn()
     {
+        Debug.Log("Enemy turn started");
+
         //throw new System.NotImplementedException();
-        if(attackEvent != null)
+        StartCoroutine(DoAttack());
+    }
+
+    IEnumerator DoAttack()
+    {
+        yield return new WaitForSeconds(4.0f);
+
+        if (attackEvent != null)
             attackEvent(10.0f);
 
-        if(turnEndedEvent != null)
+        if (turnEndedEvent != null)
             turnEndedEvent();
     }
 

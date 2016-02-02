@@ -37,6 +37,12 @@ public class BattleManager : MonoBehaviour {
         player.StartTurn();
 	}
 
+    public void StartBattle()
+    {
+        // Maybe play some animations?
+        player.StartTurn();
+    }
+
     void OnPlayerTurnEnded()
     {
         Debug.Log("Player's turn ended");

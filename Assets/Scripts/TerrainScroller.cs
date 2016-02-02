@@ -11,12 +11,12 @@ public class TerrainScroller : MonoBehaviour {
     public GameManager enemyReference;
     // Use this for initialization
 	void Start () {
-    enemyReference = GameObject.FindObjectOfType<GameManager>();
+   // enemyReference = GameObject.FindObjectOfType<GameManager>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (enemyReference.enemyCleared == true)
+        //if (enemyReference.enemyCleared == true)
         {
             offSet = Time.time * scrollSpeed;
             LeftWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
