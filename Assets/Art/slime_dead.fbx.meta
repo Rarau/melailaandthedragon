@@ -16,7 +16,7 @@ ModelImporter:
     400006: //RootNode
     400008: Slime_mesh
     4300000: Slime_mesh
-    7400000: Slime_Dead
+    7400000: Dead
     9500000: //RootNode
     11100000: //RootNode
     13700000: Slime_mesh
@@ -41,11 +41,11 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Slime_Dead
+      name: Dead
       takeName: Take 001
       firstFrame: 1
       lastFrame: 24
-      wrapMode: 0
+      wrapMode: 8
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0

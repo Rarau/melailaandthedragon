@@ -75,6 +75,9 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("YOU DIEDED...");
         if (playerDefeatedEvent != null)
             playerDefeatedEvent();
+
+        player.BattleEnded();
+        enemy.BattleEnded();
     }
 
     void OnEnemyDead()
@@ -84,5 +87,6 @@ public class BattleManager : MonoBehaviour {
             monsterDefeatedEvent();
 
         player.BattleEnded();
+        enemy.BattleEnded();
     }
 }

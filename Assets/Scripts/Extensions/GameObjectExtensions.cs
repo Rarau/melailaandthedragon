@@ -2,9 +2,9 @@
 using System;
 using System.Collections;
 
-public class GameObjectExtensions
+public static class GameObjectExtensions
 {
-    IEnumerator GoToPos(this GameObject go, Vector3 pos, float speed, Action onFinish = null)
+    public static IEnumerator GoToPos(this GameObject go, Vector3 pos, float speed, Action onFinish = null)
     {
         //pos.y = transform.position.y;
         while (Vector3.SqrMagnitude(go.transform.position - pos) > 0.1f)

@@ -76,6 +76,7 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 
     public void BattleEnded()
     {
+        Debug.Log("Player battle ended");
         StopAllCoroutines();
     }
 

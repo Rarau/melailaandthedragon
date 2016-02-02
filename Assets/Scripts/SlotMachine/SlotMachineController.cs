@@ -22,7 +22,6 @@ public class SlotMachineController : MonoBehaviour
 	void Start () {
         reels = GetComponentsInChildren<ReelController>();
         animation = GetComponentInChildren<Animation>();
-
 	}
 	
 	// Update is called once per frame
@@ -35,6 +34,8 @@ public class SlotMachineController : MonoBehaviour
                 Debug.Log("Slot machine reels stopped");
                 if (reelsStoppedEvent != null)
                 {
+                    // TO-DO: This is just hardcoded nonsense!!
+                    // Remove this and check the reels to fill the parameters
                     SlotMachineResult r;
                     r.numAttacks = 3;
                     r.critical = false;
