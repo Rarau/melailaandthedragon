@@ -22,11 +22,11 @@ public class GameManager : MonoBehaviour {
     public GameObject[] buttons;
     public GameObject slime;
     public GameObject[] enemyType;
-    public int enemyAmount = 5;
     List<GameObject> enemies;
     public bool enemyCleared = false;
     public float timer;
     private GameObject enemy;
+
     public BattleManager battleManager;
 
     public Camera camera; //create camera object to affect the intended camera for raycast, else Camera.Main finds first main camera.
@@ -34,12 +34,21 @@ public class GameManager : MonoBehaviour {
     RaycastHit rayHit;
 	// Use this for initialization
 	void Start () {
+        battleManager = FindObjectOfType<BattleManager>();
+
         fsm = new StateMachine<GameManager>(this);
         fsm.setState(new IntroState());
 
+
+
         buttons = GameObject.FindGameObjectsWithTag("buttons").OrderBy(go => go.name).ToArray(); // Sorts array of gameobjects in order by name. requires System.Linq
         timer = 3.0f;
-        enemy = GameObject.FindGameObjectWithTag("Slime");
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+    }
+
+    void SpawnEnemy()
+    {
+
     }
 
     void Update ()

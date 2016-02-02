@@ -10,17 +10,13 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     public float hp = 100.0f;
     bool dead;
     public Animation animation;
+
+
 	// Use this for initialization
 	void Start () {
         dead = false;
         animation = GetComponent<Animation>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 
     public void StartTurn()
@@ -28,31 +24,23 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         Debug.Log("Enemy turn started");
 
         //throw new System.NotImplementedException();
-        animation.clip = animation.GetClip("Slime_Attack");
+        animation.clip = animation.GetClip("Attack");
         StartCoroutine(animation.WhilePlaying(() =>
         {
             if (attackEvent != null)
+            {
+                // TO-DO: Randomize damage or something ???
                 attackEvent(10.0f);
+            }
             if (turnEndedEvent != null)
                 turnEndedEvent();
 
-            animation.CrossFade("Slime_Idle", 1.65f);
+            animation.CrossFade("Idle", 1.65f);
 
         }));
 
-        //StartCoroutine(DoAttack());
     }
 
-    IEnumerator DoAttack()
-    {
-        yield return new WaitForSeconds(4.0f);
-
-        if (attackEvent != null)
-            attackEvent(10.0f);
-
-        if (turnEndedEvent != null)
-            turnEndedEvent();
-    }
 
     public void ReceiveAttack(float damage)
     {
@@ -62,7 +50,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         hp = Mathf.Max(0.0f, hp - damage);
         if (hp <= 0.0f && deadEvent != null)
         {
-            animation.clip = animation.GetClip("Slime_Dead");
+            animation.clip = animation.GetClip("Dead");
             StartCoroutine(animation.WhilePlaying(() =>
             {
                 deadEvent();
@@ -71,11 +59,8 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         }
     }
 
-
-
-
     public void BattleEnded()
     {
-        //throw new System.NotImplementedException();
+        StopAllCoroutines();
     }
 }
