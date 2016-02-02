@@ -8,15 +8,20 @@ public class TerrainScroller : MonoBehaviour {
     public Renderer LeftWall;
     public Renderer RightWall;
     public Renderer Floor;
+    public GameManager enemyReference;
     // Use this for initialization
 	void Start () {
+    enemyReference = GameObject.FindObjectOfType<GameManager>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        offSet = Time.time * scrollSpeed;
-        LeftWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
-        RightWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
-        Floor.material.SetTextureOffset("_MainTex", new Vector2(offSet,0));
+        if (enemyReference.enemyCleared == true)
+        {
+            offSet = Time.time * scrollSpeed;
+            LeftWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+            RightWall.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+            Floor.material.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+        }
     }
 }
