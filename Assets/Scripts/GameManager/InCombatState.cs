@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IdleState : GameState {
+public class InCombatState : GameState {
 
 
     public void enter(GameManager agent)
@@ -17,8 +17,8 @@ public class IdleState : GameState {
 
     }
 
-    protected override void OnHandleDown()
+    protected override void OnEnemyDied()
     {
-        Debug.Log("Handle down idle");
+        Debug.Log("Enemy DIED");
     }
 }

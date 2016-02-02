@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: a7f43acd0bc1b434ead0ea82ca88b3a8
-timeCreated: 1453721426
-licenseType: Free
+guid: 401e450dae5eca146b8cb3482e76b0a5
+timeCreated: 1454448881
+licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -16,7 +16,7 @@ ModelImporter:
     400006: //RootNode
     400008: Slime_mesh
     4300000: Slime_mesh
-    7400000: Slime_Idle
+    7400000: Slime_Attack
     9500000: //RootNode
     11100000: //RootNode
     13700000: Slime_mesh
@@ -41,16 +41,16 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Slime_Idle
+      name: Slime_Attack
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 66.3199997
-      wrapMode: 2
+      lastFrame: 24
+      wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 1
-      loopTime: 1
+      loop: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

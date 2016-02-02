@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
      */
     StateMachine<GameManager> fsm;
 
-    public event Action handleDownEvent;
+    public event Action enemyDeadEvent;
 
     public GameObject[] buttons;
     public GameObject slime;
@@ -27,36 +27,23 @@ public class GameManager : MonoBehaviour {
     public bool enemyCleared = false;
     public float timer;
     private GameObject enemy;
+    public BattleManager battleManager;
+
     public Camera camera; //create camera object to affect the intended camera for raycast, else Camera.Main finds first main camera.
     Ray ray;
     RaycastHit rayHit;
 	// Use this for initialization
 	void Start () {
         fsm = new StateMachine<GameManager>(this);
-        fsm.setState(new IdleState());
+        fsm.setState(new IntroState());
 
         buttons = GameObject.FindGameObjectsWithTag("buttons").OrderBy(go => go.name).ToArray(); // Sorts array of gameobjects in order by name. requires System.Linq
         timer = 3.0f;
         enemy = GameObject.FindGameObjectWithTag("Slime");
-
-
-        //enemies = new List<GameObject>();
-        //for (int i = 0; i< enemyAmount;i++)
-        //{
-        //    GameObject obj = (GameObject)Instantiate(slime);
-        //    obj.SetActive(false);
-        //    enemies.Add(obj);
-        //}                                                     //Testing out pooling
-
-       // HandleController reel = gameObject.GetComponent<HandleController>();
     }
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-            if (handleDownEvent != null)
-                handleDownEvent();
-
         if (Input.GetKeyDown("x"))
         {
             enemy.SetActive(false);
@@ -98,9 +85,5 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
-
-       
-
-
 	}
 }

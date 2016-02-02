@@ -17,7 +17,9 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 	// Use this for initialization
 	void Start () {
         slotMachine.reelsStoppedEvent += OnSlotMachineReelsStopped;
-        slotMachine.enabled = false;
+        Debug.Log(" player");
+
+        //slotMachine.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -72,5 +74,9 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
             deadEvent();
     }
 
+    public void BattleEnded()
+    {
+        StopAllCoroutines();
+    }
 
 }

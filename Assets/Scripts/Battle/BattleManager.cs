@@ -9,6 +9,8 @@ public interface IBattleAgent
     event Action deadEvent;
 
     void StartTurn();
+    void BattleEnded();
+
     void ReceiveAttack(float damage);
 }
 
@@ -34,7 +36,7 @@ public class BattleManager : MonoBehaviour {
         enemy.deadEvent += OnEnemyDead;
 
         // Player starts attacking, can be changed tho
-        player.StartTurn();
+        //player.StartTurn();
 	}
 
     public void StartBattle()
@@ -42,6 +44,8 @@ public class BattleManager : MonoBehaviour {
         // Maybe play some animations?
         player.StartTurn();
     }
+
+
 
     void OnPlayerTurnEnded()
     {
@@ -78,5 +82,7 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("ENEMY Killed GG");
         if (monsterDefeatedEvent != null)
             monsterDefeatedEvent();
+
+        player.BattleEnded();
     }
 }

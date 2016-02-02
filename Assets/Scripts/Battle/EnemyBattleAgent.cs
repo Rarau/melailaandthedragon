@@ -8,11 +8,13 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     public event System.Action<float> attackEvent;
 
     public float hp = 100.0f;
-
+    bool dead;
+    public Animation animation;
 	// Use this for initialization
 	void Start () {
-	
-	}
+        dead = false;
+        animation = GetComponent<Animation>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,7 +28,19 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         Debug.Log("Enemy turn started");
 
         //throw new System.NotImplementedException();
-        StartCoroutine(DoAttack());
+        animation.clip = animation.GetClip("Slime_Attack");
+        StartCoroutine(animation.WhilePlaying(() =>
+        {
+            if (attackEvent != null)
+                attackEvent(10.0f);
+            if (turnEndedEvent != null)
+                turnEndedEvent();
+
+            animation.CrossFade("Slime_Idle", 1.65f);
+
+        }));
+
+        //StartCoroutine(DoAttack());
     }
 
     IEnumerator DoAttack()
@@ -42,10 +56,26 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
 
     public void ReceiveAttack(float damage)
     {
+        if (dead)
+            return;
+
         hp = Mathf.Max(0.0f, hp - damage);
         if (hp <= 0.0f && deadEvent != null)
-            deadEvent();
+        {
+            animation.clip = animation.GetClip("Slime_Dead");
+            StartCoroutine(animation.WhilePlaying(() =>
+            {
+                deadEvent();
+                dead = true;
+            }));
+        }
     }
 
 
+
+
+    public void BattleEnded()
+    {
+        //throw new System.NotImplementedException();
+    }
 }
