@@ -7,7 +7,7 @@ public class ReelController : MonoBehaviour
 	int numIcons = 5;
 
 	public bool rotating = false;
-	public Renderer mr;
+	public Renderer meshRenderer;
 	public float finalAngle;
 	public Quaternion initRot;
 	Vector3 center;
@@ -16,9 +16,9 @@ public class ReelController : MonoBehaviour
 	{
 		initRot = transform.localRotation;
 
-		mr = GetComponent<Renderer> ();
+		meshRenderer = GetComponent<Renderer> ();
 
-		center = mr.bounds.center;
+		center = meshRenderer.bounds.center;
 	}
 
 	public void Rotate(int iconNumber)
