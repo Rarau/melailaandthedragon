@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-
+/*
 public class GameManager : MonoBehaviour {
 
     StateMachine<GameManager> fsm;
@@ -23,3 +23,4 @@ public class GameManager : MonoBehaviour {
                 handleDownEvent();
 	}
 }
+*/
