@@ -11,13 +11,12 @@ public class HandleController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
 		animation = GetComponent<Animation> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+    {
 		if (Input.GetKeyDown (KeyCode.Space) && curReel < 3) {
 			reels[curReel].Rotate(Random.Range(0, 5));
 			curReel ++;

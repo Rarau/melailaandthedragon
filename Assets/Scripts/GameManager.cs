@@ -6,7 +6,15 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-
+    /**
+     * GAME STATES:
+     * GAME_INTRO
+     * ENEMY_SPAWN
+     * PLAYER_TURN
+     * ENEMY_TURN
+     * BATTLE_END
+     * 
+     */
     StateMachine<GameManager> fsm;
 
     public event Action handleDownEvent;
