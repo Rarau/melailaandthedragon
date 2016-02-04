@@ -11,8 +11,11 @@ public struct SlotMachineResult
 
 public class SlotMachineController : MonoBehaviour
 {
+    public GameObject[] buttons;
     public event Action<SlotMachineResult> reelsStoppedEvent;
-
+    public Camera camera; //create camera object to affect the intended camera for raycast, else Camera.Main finds first main camera.
+    Ray ray;
+    RaycastHit rayHit;
     public ReelController[] reels;
 
     Animation animation;
@@ -26,6 +29,34 @@ public class SlotMachineController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+
+        ray = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out rayHit, 100.0f) && Input.GetMouseButtonDown(0) /*&& ReelScript.rotating == true*/)
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (rayHit.collider.gameObject == buttons[i].gameObject)
+                {
+                    if(checkReelsStopped())
+                    {
+                        if (reelsStoppedEvent != null)
+                        {
+                            // TO-DO: This is just hardcoded nonsense!!
+                            // Remove this and check the reels to fill the parameters
+                            // fix tomorrow plskthx
+                            SlotMachineResult r;
+                            r.numAttacks = int.Parse(reels[1].getIconString());
+                            r.critical = reels[2].getIconString() == "Crit";
+                            r.attackType = reels[0].getIconString() == "Heal" ? 0 : 1;
+                            reelsStoppedEvent(r);
+                        }
+                    }
+                    reels[i].Rotate(UnityEngine.Random.Range(0, 5));
+                    Debug.Log(i + "Clicked");
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && curReel < 3)
         {
             reels[curReel].Rotate(UnityEngine.Random.Range(0, 5));            
@@ -37,9 +68,9 @@ public class SlotMachineController : MonoBehaviour
                     // TO-DO: This is just hardcoded nonsense!!
                     // Remove this and check the reels to fill the parameters
                     SlotMachineResult r;
-                    r.numAttacks = 3;
-                    r.critical = false;
-                    r.attackType = 1;
+                    r.numAttacks = int.Parse(reels[1].getIconString());
+                    r.critical = reels[2].getIconString() == "Crit";
+                    r.attackType = reels[0].getIconString() == "Heal" ? 0:1;
                     reelsStoppedEvent(r);
                 }
             }
@@ -50,7 +81,17 @@ public class SlotMachineController : MonoBehaviour
             OnMouseDown();
 	}
 
-    void OnMouseDown()
+    bool checkReelsStopped()
+    {
+        for (int i=0;i<reels.Length;i++)
+        {
+            if (reels[i].rotating)
+                return false;                
+        }
+        return true;
+    }
+
+    public void OnMouseDown()
     {
 
         Debug.Log("Spinning To Winning!");
@@ -62,4 +103,5 @@ public class SlotMachineController : MonoBehaviour
         curReel = 0;
 
     }
+    
 }

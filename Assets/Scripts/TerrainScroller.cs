@@ -8,7 +8,7 @@ public class TerrainScroller : MonoBehaviour {
     public Renderer LeftWall;
     public Renderer RightWall;
     public Renderer Floor;
-    public GameManager enemyReference;
+    //public GameManager enemyReference;
     // Use this for initialization
 	void Start () {
    // enemyReference = GameObject.FindObjectOfType<GameManager>();

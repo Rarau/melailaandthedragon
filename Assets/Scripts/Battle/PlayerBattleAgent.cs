@@ -8,8 +8,9 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
     public event Action turnEndedEvent;
     public event Action deadEvent;
     public event Action<float> attackEvent;
-
+ 
     public Animation attackAnimation;
+    public Animation healAnimation;
 
     public float hp = 100.0f;
 
@@ -22,6 +23,10 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
         //slotMachine.enabled = false;
 	}
 	
+    void Medic(float amount)
+    {
+        hp = Mathf.Min(hp + amount,100);
+    }
 	// Update is called once per frame
 	void Update () {
 	
@@ -30,33 +35,74 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 
     public void StartTurn()
     {
-        Debug.Log("Player turn started");
+   //     Debug.Log("Player turn started");
 
         slotMachine.enabled = true;
     }
 
     public void OnSlotMachineReelsStopped(SlotMachineResult reelsResult)
     {
-        Debug.Log("Reels stopped player");
-        StartCoroutine(DoAttacks(3));
+   //     Debug.Log("Reels stopped player");
+   if (reelsResult.attackType == 0)
+        {
+            StartCoroutine(DoHeals(reelsResult.numAttacks, reelsResult.critical));
+        }
+   else
+        StartCoroutine(DoAttacks(reelsResult.numAttacks,reelsResult.critical));
+    }
+
+    IEnumerator DoHeals(int numHeals, bool crit)
+    {
+        //Debug.Log("Player attacked once");
+        
+        for (int i = 0; i < numHeals; ++i)
+        {
+            float healAmount = 10.0f;
+
+            healAnimation.Rewind();
+            healAnimation.Stop();
+            yield return StartCoroutine(healAnimation.WhilePlaying(() =>
+            {
+                if (crit == true)
+            {
+                healAmount *= 2;
+            }
+            Medic(healAmount);
+            }            ));
+
 
 
     }
-
-    IEnumerator DoAttacks(int numAttacks)
+    yield return null;
+        if (turnEndedEvent != null)
+        {
+            slotMachine.enabled = false;
+            turnEndedEvent();
+        }
+    }
+        IEnumerator DoAttacks(int numAttacks,bool crit)
     {
-        Debug.Log("Player attacked once");
+        //Debug.Log("Player attacked once");
 
         for (int i = 0; i < numAttacks; ++i)
         {
+            float damage = 10.0f;
+
             // TO-DO: ACtually parse reelsResult data and attack or heal as stablished
             attackAnimation.Rewind();
             attackAnimation.Stop();
             yield return StartCoroutine(attackAnimation.WhilePlaying(() => 
             {
                 if (attackEvent != null)
-                    attackEvent(10.0f);
-                Debug.Log("Player attacked once");
+                {
+                    
+                    if (crit == true)
+                        damage*=2;
+                    
+                    attackEvent(damage);
+                }
+        //        Debug.Log("Player attacked once");
+                Debug.Log("Damage Dealt: " + damage);
             }));
         }
 
@@ -76,8 +122,13 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 
     public void BattleEnded()
     {
-        Debug.Log("Player battle ended");
+      //  Debug.Log("Player battle ended");
         StopAllCoroutines();
     }
 
+
+    public void SetActive(bool wat)
+    {
+        gameObject.SetActive(wat);
+    }
 }

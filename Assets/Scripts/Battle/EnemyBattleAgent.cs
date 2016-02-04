@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {    
 
@@ -15,6 +16,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
 
     public Transform spawnPos;
     public Transform combatPos;
+    public Transform deathResetPos;
 
 	// Use this for initialization
 	void Awake () {
@@ -27,7 +29,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         hp = initalHP;
         animation.CrossFade("Idle", 0.0f);
         transform.position = spawnPos.position;
-        StartCoroutine(gameObject.GoToPos(combatPos.position, 1.0f, () =>
+        StartCoroutine(gameObject.GoToPos(combatPos.position, 3.0f, () =>
         {
             if (spawnEvent != null)
                 spawnEvent();
@@ -44,6 +46,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         animation.clip = animation.GetClip("Attack");
         StartCoroutine(animation.WhilePlaying(() =>
         {
+            
             if (attackEvent != null)
             {
                 // TO-DO: Randomize damage or something ???
@@ -69,12 +72,13 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         if (hp <= 0.0f && deadEvent != null)
         {
             dead = true;
-
+            transform.position = new Vector3(transform.position.x, deathResetPos.position.y,transform.position.z);
+            this.StartCoroutine(gameObject.GoToPos(deathResetPos.position, 1.5f,() => {
+                Debug.Log("Monster Dead"); gameObject.SetActive(false); }));
             animation.clip = animation.GetClip("Dead");
             StartCoroutine(animation.WhilePlaying(() =>
             {
                 deadEvent();
-                Debug.Log("Monster Dead");
 
             }));
         }
@@ -83,6 +87,15 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     public void BattleEnded()
     {
         Debug.Log("Monster Battle ended");
-        StopAllCoroutines();
+       // StopAllCoroutines();
     }
+
+    public void SetActive(bool wat)
+    {
+        gameObject.SetActive(wat);
+    }
+    //public void monsterDefeated()
+    //{
+
+    //}
 }
