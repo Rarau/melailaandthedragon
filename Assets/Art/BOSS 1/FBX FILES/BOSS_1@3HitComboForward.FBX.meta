@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 5e92a8974e558724680002d35f30a1ee
+timeCreated: 1429231560
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: BOSS_1_
+    100004: BOSS_1_ Head
+    100006: BOSS_1_ L Calf
+    100008: BOSS_1_ L Clavicle
+    100010: BOSS_1_ L Finger0
+    100012: BOSS_1_ L Finger01
+    100014: BOSS_1_ L Finger1
+    100016: BOSS_1_ L Finger11
+    100018: BOSS_1_ L Finger2
+    100020: BOSS_1_ L Finger21
+    100022: BOSS_1_ L Foot
+    100024: BOSS_1_ L Forearm
+    100026: BOSS_1_ L Hand
+    100028: BOSS_1_ L Thigh
+    100030: BOSS_1_ L Toe0
+    100032: BOSS_1_ L Toe1
+    100034: BOSS_1_ L Toe2
+    100036: BOSS_1_ L UpperArm
+    100038: BOSS_1_ Neck
+    100040: BOSS_1_ Pelvis
+    100042: BOSS_1_ Queue de cheval 1
+    100044: BOSS_1_ R Calf
+    100046: BOSS_1_ R Clavicle
+    100048: BOSS_1_ R Finger0
+    100050: BOSS_1_ R Finger01
+    100052: BOSS_1_ R Finger1
+    100054: BOSS_1_ R Finger11
+    100056: BOSS_1_ R Finger2
+    100058: BOSS_1_ R Finger21
+    100060: BOSS_1_ R Foot
+    100062: BOSS_1_ R Forearm
+    100064: BOSS_1_ R Hand
+    100066: BOSS_1_ R Thigh
+    100068: BOSS_1_ R Toe0
+    100070: BOSS_1_ R Toe1
+    100072: BOSS_1_ R Toe2
+    100074: BOSS_1_ R UpperArm
+    100076: BOSS_1_ Spine
+    100078: BOSS_1_ Spine1
+    100080: BOSS_1_ Tail
+    100082: BOSS_1_ Tail1
+    100084: BOSS_1_ Tail2
+    100086: BOSS_1_ Tail3
+    100088: BOSS_1_ Tail4
+    400000: //RootNode
+    400002: BOSS_1_
+    400004: BOSS_1_ Head
+    400006: BOSS_1_ L Calf
+    400008: BOSS_1_ L Clavicle
+    400010: BOSS_1_ L Finger0
+    400012: BOSS_1_ L Finger01
+    400014: BOSS_1_ L Finger1
+    400016: BOSS_1_ L Finger11
+    400018: BOSS_1_ L Finger2
+    400020: BOSS_1_ L Finger21
+    400022: BOSS_1_ L Foot
+    400024: BOSS_1_ L Forearm
+    400026: BOSS_1_ L Hand
+    400028: BOSS_1_ L Thigh
+    400030: BOSS_1_ L Toe0
+    400032: BOSS_1_ L Toe1
+    400034: BOSS_1_ L Toe2
+    400036: BOSS_1_ L UpperArm
+    400038: BOSS_1_ Neck
+    400040: BOSS_1_ Pelvis
+    400042: BOSS_1_ Queue de cheval 1
+    400044: BOSS_1_ R Calf
+    400046: BOSS_1_ R Clavicle
+    400048: BOSS_1_ R Finger0
+    400050: BOSS_1_ R Finger01
+    400052: BOSS_1_ R Finger1
+    400054: BOSS_1_ R Finger11
+    400056: BOSS_1_ R Finger2
+    400058: BOSS_1_ R Finger21
+    400060: BOSS_1_ R Foot
+    400062: BOSS_1_ R Forearm
+    400064: BOSS_1_ R Hand
+    400066: BOSS_1_ R Thigh
+    400068: BOSS_1_ R Toe0
+    400070: BOSS_1_ R Toe1
+    400072: BOSS_1_ R Toe2
+    400074: BOSS_1_ R UpperArm
+    400076: BOSS_1_ Spine
+    400078: BOSS_1_ Spine1
+    400080: BOSS_1_ Tail
+    400082: BOSS_1_ Tail1
+    400084: BOSS_1_ Tail2
+    400086: BOSS_1_ Tail3
+    400088: BOSS_1_ Tail4
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 0
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 2
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
