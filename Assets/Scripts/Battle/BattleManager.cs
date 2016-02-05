@@ -27,7 +27,7 @@ public class BattleManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<IBattleAgent>();
-        enemy = GameObject.Find("Enemy").GetComponent<IBattleAgent>();
+        enemy = GameObject.FindWithTag("Enemy").GetComponent<IBattleAgent>();
         terrainThingy = GameObject.FindObjectOfType<TerrainScroller>();
         player.turnEndedEvent += OnPlayerTurnEnded;
         player.attackEvent += OnPlayerAttack;

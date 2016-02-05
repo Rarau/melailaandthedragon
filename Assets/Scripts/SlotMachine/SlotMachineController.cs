@@ -37,17 +37,15 @@ public class SlotMachineController : MonoBehaviour
             {
                 if (rayHit.collider.gameObject == buttons[i].gameObject)
                 {
-                    if(checkReelsStopped())
+                    if(checkReelsStopped() == 2)
                     {
                         if (reelsStoppedEvent != null)
                         {
-                            // TO-DO: This is just hardcoded nonsense!!
-                            // Remove this and check the reels to fill the parameters
-                            // fix tomorrow plskthx
                             SlotMachineResult r;
                             r.numAttacks = int.Parse(reels[1].getIconString());
                             r.critical = reels[2].getIconString() == "Crit";
                             r.attackType = reels[0].getIconString() == "Heal" ? 0 : 1;
+                            enabled = false;
                             reelsStoppedEvent(r);
                         }
                     }
@@ -56,6 +54,7 @@ public class SlotMachineController : MonoBehaviour
                 }
             }
         }
+        /*
 
         if (Input.GetKeyDown(KeyCode.Space) && curReel < 3)
         {
@@ -76,23 +75,28 @@ public class SlotMachineController : MonoBehaviour
             }
             curReel++;
         }
+         */
 
-        if (Input.GetKeyDown(KeyCode.A))
-            OnMouseDown();
+      //  if (Input.GetKeyDown(KeyCode.A))
+      //      OnMouseDown();
 	}
 
-    bool checkReelsStopped()
+    int checkReelsStopped()
     {
+        int r = 0;
         for (int i=0;i<reels.Length;i++)
         {
-            if (reels[i].rotating)
-                return false;                
+            if (!reels[i].rotating)
+                r++;                
         }
-        return true;
+        return r;
     }
 
     public void OnMouseDown()
     {
+        // Cehck that the machine is enabled and all reels are stopped
+        if (!enabled || checkReelsStopped() != reels.Length)
+            return;
 
         Debug.Log("Spinning To Winning!");
         animation.Play();

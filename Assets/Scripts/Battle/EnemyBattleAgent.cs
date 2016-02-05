@@ -27,12 +27,14 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     {
         dead = false;
         hp = initalHP;
-        animation.CrossFade("Idle", 0.0f);
+        animation.CrossFade("Walk", 0.0f);
         transform.position = spawnPos.position;
         StartCoroutine(gameObject.GoToPos(combatPos.position, 3.0f, () =>
         {
             if (spawnEvent != null)
                 spawnEvent();
+            animation.CrossFade("Idle", 1.0f);
+
         }));
     }
 
@@ -50,7 +52,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
             if (attackEvent != null)
             {
                 // TO-DO: Randomize damage or something ???
-                attackEvent(10.0f);
+                attackEvent(100.0f);
             }
             if (turnEndedEvent != null)
                 turnEndedEvent();
@@ -73,8 +75,8 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
         {
             dead = true;
             transform.position = new Vector3(transform.position.x, deathResetPos.position.y,transform.position.z);
-            this.StartCoroutine(gameObject.GoToPos(deathResetPos.position, 1.5f,() => {
-                Debug.Log("Monster Dead"); gameObject.SetActive(false); }));
+            //this.StartCoroutine(gameObject.GoToPos(deathResetPos.position, 1.5f,() => {
+            //    Debug.Log("Monster Dead"); gameObject.SetActive(false); }));
             animation.clip = animation.GetClip("Dead");
             StartCoroutine(animation.WhilePlaying(() =>
             {
