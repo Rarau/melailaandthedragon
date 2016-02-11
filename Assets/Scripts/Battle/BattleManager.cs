@@ -7,7 +7,7 @@ public interface IBattleAgent
     event Action turnEndedEvent;
     event Action<float> attackEvent;
     event Action deadEvent;
-    void SetActive(bool wat);
+    void SetActive(bool active);
 
 
     void StartTurn();
@@ -86,7 +86,7 @@ public class BattleManager : MonoBehaviour {
 
     void OnEnemyDead()
     {
-        terrainThingy.enabled = true;
+        
      //   Debug.Log("ENEMY Killed GG");
         if (monsterDefeatedEvent != null)
             monsterDefeatedEvent();
@@ -95,6 +95,8 @@ public class BattleManager : MonoBehaviour {
         enemy.BattleEnded();
 
         if (battleEndedEvent != null)
-            battleEndedEvent();
+        terrainThingy.enabled = true;
+        enemy.SetActive(false);
+        battleEndedEvent();
     }
 }

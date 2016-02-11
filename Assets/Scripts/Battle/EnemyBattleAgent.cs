@@ -8,12 +8,11 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     public event System.Action spawnEvent;
     public event System.Action deadEvent;
     public event System.Action<float> attackEvent;
-
     public float initalHP = 100f;
     public float hp = 100.0f;
     public bool dead;
     public Animation animation;
-
+    public float damage;
     public Transform spawnPos;
     public Transform combatPos;
     public Transform deathResetPos;
@@ -40,6 +39,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
 
     public void StartTurn()
     {
+        damage = (int)UnityEngine.Random.Range(10.0f, 25.0f);
         if (dead)
             return;
         Debug.Log("Enemy turn started");
@@ -52,7 +52,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
             if (attackEvent != null)
             {
                 // TO-DO: Randomize damage or something ???
-                attackEvent(100.0f);
+                attackEvent(damage);
             }
             if (turnEndedEvent != null)
                 turnEndedEvent();
@@ -92,9 +92,9 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
        // StopAllCoroutines();
     }
 
-    public void SetActive(bool wat)
+    public void SetActive(bool active)
     {
-        gameObject.SetActive(wat);
+        gameObject.SetActive(active);
     }
     //public void monsterDefeated()
     //{
