@@ -6,6 +6,7 @@ public class ShakeEffect : MonoBehaviour {
     public float magnitude = 0.5f;
     public float frequency = 5.0f;
 
+    public bool loop;
     public bool playOnAwake;
     public bool selfDisable = true;
 	// Use this for initialization
@@ -30,8 +31,8 @@ public class ShakeEffect : MonoBehaviour {
             float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
 
             // map value to [-1, 1]
-            float x = Mathf.PerlinNoise(percentComplete * frequency, 0.0f) * 2.0f - 1.0f; //Random.value * 2.0f - 1.0f;
-            float y = Mathf.PerlinNoise(0.0f, percentComplete * frequency) * 2.0f - 1.0f;//Random.value * 2.0f - 1.0f;
+            float x = Mathf.PerlinNoise(Time.time * frequency, 0.0f) * 2.0f - 1.0f; //Random.value * 2.0f - 1.0f;
+            float y = Mathf.PerlinNoise(0.0f, Time.time * frequency) * 2.0f - 1.0f;//Random.value * 2.0f - 1.0f;
             x *= magnitude * damper;
             y *= magnitude * damper;
 
@@ -43,6 +44,8 @@ public class ShakeEffect : MonoBehaviour {
 
        transform.position = originalCamPos;
        enabled = !selfDisable;
+       if (loop)
+           yield return StartCoroutine(Shake());
     }
 
 }

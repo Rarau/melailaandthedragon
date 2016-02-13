@@ -16,9 +16,13 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     public Transform spawnPos;
     public Transform combatPos;
     public Transform deathResetPos;
+    public AudioSource audioSource;
+
+    public AudioClip attackImpactClip;
 
 	// Use this for initialization
 	void Awake () {
+        audioSource = GetComponent<AudioSource>();
         animation = GetComponent<Animation>();
     }
 
@@ -99,6 +103,8 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
 
     public void AnimationAttackEvent()
     {
+        //audioSource.clip = attackImpactClip;
+        audioSource.PlayOneShot(attackImpactClip);
         GameObject.FindObjectOfType<ShakeEffect>().enabled = true;
     }
     //public void monsterDefeated()
