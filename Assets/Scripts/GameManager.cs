@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour {
 
         timer = 3.0f;
         enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+        battleManager.StartBattle();
     }
 
     void battleEnded()

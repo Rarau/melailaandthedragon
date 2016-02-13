@@ -19,7 +19,8 @@ public interface IBattleAgent
 public class BattleManager : MonoBehaviour {
     public TerrainScroller terrainThingy;
     public IBattleAgent player;
-    public IBattleAgent enemy;
+    public GameObject[] enemyPool;
+    public IBattleAgent currentEnemy;
 
     public event Action monsterDefeatedEvent;
     public event Action playerDefeatedEvent;
@@ -27,15 +28,26 @@ public class BattleManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<IBattleAgent>();
-        enemy = GameObject.FindWithTag("Enemy").GetComponent<IBattleAgent>();
+        enemyPool = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject go in enemyPool)
+        {
+            go.SetActive(false);
+        }
+        //currentEnemy = GameObject.FindWithTag("Enemy").GetComponent<IBattleAgent>();
+        currentEnemy = enemyPool[UnityEngine.Random.Range(0, enemyPool.Length)].GetComponent<IBattleAgent>();
+        currentEnemy.SetActive(true);
+
         terrainThingy = GameObject.FindObjectOfType<TerrainScroller>();
+
         player.turnEndedEvent += OnPlayerTurnEnded;
         player.attackEvent += OnPlayerAttack;
         player.deadEvent += OnPlayerDead;
+
         terrainThingy.enabled = false;
-        enemy.turnEndedEvent += OnEnemyTurnEnded;
-        enemy.attackEvent += OnEnemyAttack;
-        enemy.deadEvent += OnEnemyDead;
+
+        //currentEnemy.turnEndedEvent += OnEnemyTurnEnded;
+       // currentEnemy.attackEvent += OnEnemyAttack;
+       // currentEnemy.deadEvent += OnEnemyDead;
 
         // Player starts attacking, can be changed tho
         //player.StartTurn();
@@ -43,10 +55,17 @@ public class BattleManager : MonoBehaviour {
 
     public void StartBattle()
     {
+
+
+        currentEnemy.turnEndedEvent += OnEnemyTurnEnded;
+        currentEnemy.attackEvent += OnEnemyAttack;
+        currentEnemy.deadEvent += OnEnemyDead;
+
+        currentEnemy.SetActive(true);
+
         // Maybe play some animations?
         terrainThingy.enabled = false;
         player.StartTurn();
-        enemy.SetActive(true);
     }
 
 
@@ -54,7 +73,7 @@ public class BattleManager : MonoBehaviour {
     void OnPlayerTurnEnded()
     {
        // Debug.Log("Player's turn ended");
-        enemy.StartTurn();
+        currentEnemy.StartTurn();
     }
 
     void OnEnemyTurnEnded()
@@ -65,7 +84,7 @@ public class BattleManager : MonoBehaviour {
     void OnPlayerAttack(float damage)
     {
         // TO - DO: do attack damage math and stuff
-        enemy.ReceiveAttack(damage);
+        currentEnemy.ReceiveAttack(damage);
     }
 
     void OnEnemyAttack(float damage)
@@ -82,7 +101,7 @@ public class BattleManager : MonoBehaviour {
             playerDefeatedEvent();
 
         player.BattleEnded();
-        enemy.BattleEnded();
+        currentEnemy.BattleEnded();
     }
 
     void OnEnemyDead()
@@ -93,11 +112,18 @@ public class BattleManager : MonoBehaviour {
             monsterDefeatedEvent();
 
         player.BattleEnded();
-        enemy.BattleEnded();
+        currentEnemy.BattleEnded();
 
         if (battleEndedEvent != null)
         terrainThingy.enabled = true;
-        enemy.SetActive(false);
+        currentEnemy.SetActive(false);
         battleEndedEvent();
+
+        currentEnemy.turnEndedEvent -= OnEnemyTurnEnded;
+        currentEnemy.attackEvent -= OnEnemyAttack;
+        currentEnemy.deadEvent -= OnEnemyDead;
+
+        currentEnemy = enemyPool[UnityEngine.Random.Range(0, enemyPool.Length)].GetComponent<IBattleAgent>();
+
     }
 }
