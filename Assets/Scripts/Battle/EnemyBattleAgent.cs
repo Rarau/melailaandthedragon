@@ -96,6 +96,11 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     {
         gameObject.SetActive(active);
     }
+
+    public void AnimationAttackEvent()
+    {
+        GameObject.FindObjectOfType<ShakeEffect>().enabled = true;
+    }
     //public void monsterDefeated()
     //{
 

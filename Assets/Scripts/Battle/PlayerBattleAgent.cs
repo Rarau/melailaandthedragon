@@ -18,8 +18,6 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 	// Use this for initialization
 	void Start () {
         slotMachine.reelsStoppedEvent += OnSlotMachineReelsStopped;
-        Debug.Log(" player");
-
         //slotMachine.enabled = false;
 	}
 	
@@ -64,23 +62,20 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
             yield return StartCoroutine(healAnimation.WhilePlaying(() =>
             {
                 if (crit == true)
-            {
-                healAmount *= 2;
-            }
-            Medic(healAmount);
-            }            ));
-
-
-
-    }
-    yield return null;
+                {
+                    healAmount *= 2;
+                }
+                Medic(healAmount);
+            }));
+        }
+        yield return null;
         if (turnEndedEvent != null)
         {
             slotMachine.enabled = false;
             turnEndedEvent();
         }
     }
-        IEnumerator DoAttacks(int numAttacks,bool crit)
+    IEnumerator DoAttacks(int numAttacks,bool crit)
     {
         //Debug.Log("Player attacked once");
 

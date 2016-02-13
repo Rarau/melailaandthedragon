@@ -71,6 +71,7 @@ public class BattleManager : MonoBehaviour {
     void OnEnemyAttack(float damage)
     {
         // TO - DO: do attack damage math and stuff
+
         player.ReceiveAttack(damage);
     }
 
