@@ -121,6 +121,7 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
     {
       //  Debug.Log("Player battle ended");
         StopAllCoroutines();
+        slotMachine.enabled = false;
     }
 
 

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     private GameObject enemy;
 
     public BattleManager battleManager;
-
+    public GameObject gameOverScreen;
 
 	// Use this for initialization
 	void Start () {
@@ -36,15 +36,22 @@ public class GameManager : MonoBehaviour {
 
         fsm = new StateMachine<GameManager>(this);
         fsm.setState(new IntroState());
-        battleManager.battleEndedEvent += battleEnded;
+        battleManager.battleEndedEvent += OnBattleEnded;
+        battleManager.playerDefeatedEvent += OnPlayerDefeated;
 
         timer = 3.0f;
         enemy = GameObject.FindGameObjectWithTag("Enemy");
 
         battleManager.StartBattle();
+
     }
 
-    void battleEnded()
+    void OnPlayerDefeated()
+    {
+        gameOverScreen.SetActive(true);
+    }
+
+    void OnBattleEnded()
     {
         battleCount += 1;
         
@@ -52,6 +59,7 @@ public class GameManager : MonoBehaviour {
         {
             StartCoroutine(pause());
         }
+
     }
     IEnumerator pause() { yield return new WaitForSeconds(4.1f); battleManager.StartBattle(); }
     void SpawnEnemy()
@@ -61,35 +69,12 @@ public class GameManager : MonoBehaviour {
 
     void Update ()
     {
-        //if (Input.GetKeyDown("x"))
-        //{
-        //    enemy.SetActive(false);
-        //    enemyCleared = true;
-        //    enemy.transform.Translate(new Vector3(0, 0, -18.41f));
-        //}
-        //if (enemyCleared == true)
-        //{
-        //    timer -= Time.deltaTime;
-        //}
-        //else if (enemyCleared == false && enemy.transform.position.z >= -0.54f)
-        //{
-        //  enemy.transform.Translate(new Vector3(0, 0, 6.0f * Time.deltaTime), Space.Self);
-        //}
-        ////27.72 , 3.67 , -0.54
-        ////18.41
-        //if (timer <= 0)
-        //{
-        //    enemy.SetActive(true);
-        //    enemyCleared = false;
-        //    timer = 3.0f;
-        //}
-       
-        //if (GameObject.FindGameObjectsWithTag("Slime") == null)
-        //{
-        //    Instantiate()
-        //}
         HandleController HandleScript = FindObjectOfType<HandleController>();
         ReelController ReelScript = FindObjectOfType<ReelController>();
-     
 	}
+
+    public void PlayAgainOnClick()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }
