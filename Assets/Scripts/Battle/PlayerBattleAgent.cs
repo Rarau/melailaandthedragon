@@ -128,4 +128,10 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
     {
         gameObject.SetActive(wat);
     }
+
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 }

@@ -114,4 +114,10 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     //{
 
     //}
+
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 }

@@ -14,6 +14,8 @@ public interface IBattleAgent
     void BattleEnded();
 
     void ReceiveAttack(float damage);
+
+    GameObject GetGameObject();
 }
 
 public class BattleManager : MonoBehaviour {
@@ -25,6 +27,9 @@ public class BattleManager : MonoBehaviour {
     public event Action monsterDefeatedEvent;
     public event Action playerDefeatedEvent;
     public event Action battleEndedEvent;
+
+    public EnemyHealthBar enemyHealthBar;
+
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<IBattleAgent>();
@@ -44,7 +49,7 @@ public class BattleManager : MonoBehaviour {
         player.deadEvent += OnPlayerDead;
 
         terrainThingy.enabled = false;
-
+        enemyHealthBar = FindObjectOfType<EnemyHealthBar>();
         //currentEnemy.turnEndedEvent += OnEnemyTurnEnded;
        // currentEnemy.attackEvent += OnEnemyAttack;
        // currentEnemy.deadEvent += OnEnemyDead;
@@ -66,6 +71,10 @@ public class BattleManager : MonoBehaviour {
         // Maybe play some animations?
         terrainThingy.enabled = false;
         player.StartTurn();
+
+        enemyHealthBar.SetTarget(currentEnemy.GetGameObject().GetComponent<EnemyBattleAgent>());    
+        enemyHealthBar.gameObject.SetActive(true);
+
     }
 
 
@@ -125,5 +134,6 @@ public class BattleManager : MonoBehaviour {
 
         currentEnemy = enemyPool[UnityEngine.Random.Range(0, enemyPool.Length)].GetComponent<IBattleAgent>();
 
+        enemyHealthBar.gameObject.SetActive(false);
     }
 }
