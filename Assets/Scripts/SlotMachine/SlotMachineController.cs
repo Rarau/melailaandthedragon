@@ -20,8 +20,14 @@ public class SlotMachineController : MonoBehaviour
 
     Animation animation;
     public int curReel = 0;
-
+    private bool reelsDirty = true;
 	// Use this for initialization
+
+    void OnEnable()
+    {
+        reelsDirty = true;
+    }
+
 	void Start () {
         reels = GetComponentsInChildren<ReelController>();
         animation = GetComponentInChildren<Animation>();
@@ -29,7 +35,8 @@ public class SlotMachineController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (reelsDirty)
+            return;
         ray = camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out rayHit, 100.0f) && Input.GetMouseButtonDown(0) /*&& ReelScript.rotating == true*/)
         {
@@ -37,20 +44,25 @@ public class SlotMachineController : MonoBehaviour
             {
                 if (rayHit.collider.gameObject == buttons[i].gameObject)
                 {
-                    if(checkReelsStopped() == 2)
+                    reels[i].Rotate(UnityEngine.Random.Range(0, 5));
+                    Debug.Log(i + "Clicked");
+                    if(checkReelsStopped() == 3)
                     {
                         if (reelsStoppedEvent != null)
                         {
                             SlotMachineResult r;
                             r.numAttacks = int.Parse(reels[1].getIconString());
                             r.critical = reels[2].getIconString() == "Crit";
+                            if(r.critical)
+                            {
+                                Debug.Log("CRIT");
+                            }
                             r.attackType = reels[0].getIconString() == "Heal" ? 0 : 1;
                             enabled = false;
                             reelsStoppedEvent(r);
+                            //return;
                         }
                     }
-                    reels[i].Rotate(UnityEngine.Random.Range(0, 5));
-                    Debug.Log(i + "Clicked");
                 }
             }
         }
@@ -95,9 +107,10 @@ public class SlotMachineController : MonoBehaviour
     public void OnMouseDown()
     {
         // Cehck that the machine is enabled and all reels are stopped
-        if (!enabled || checkReelsStopped() != reels.Length)
+        if (!enabled || checkReelsStopped() != reels.Length || !reelsDirty)
             return;
 
+        reelsDirty = false;
         Debug.Log("Spinning To Winning!");
         animation.Play();
         foreach (ReelController reel in reels)

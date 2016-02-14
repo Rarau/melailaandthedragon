@@ -19,6 +19,7 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
     public AudioSource audioSource;
 
     public AudioClip attackImpactClip;
+    public AudioClip attackRoarClip;
 
 	// Use this for initialization
 	void Awake () {
@@ -50,6 +51,8 @@ public class EnemyBattleAgent : MonoBehaviour, IBattleAgent {
 
         //throw new System.NotImplementedException();
         animation.clip = animation.GetClip("Attack");
+        audioSource.PlayOneShot(attackRoarClip);
+
         StartCoroutine(animation.WhilePlaying(() =>
         {
             

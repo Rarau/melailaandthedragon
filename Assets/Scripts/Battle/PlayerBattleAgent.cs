@@ -40,13 +40,15 @@ public class PlayerBattleAgent : MonoBehaviour, IBattleAgent
 
     public void OnSlotMachineReelsStopped(SlotMachineResult reelsResult)
     {
-   //     Debug.Log("Reels stopped player");
-   if (reelsResult.attackType == 0)
+        // Debug.Log("Reels stopped player");
+        if (reelsResult.attackType == 0)
         {
             StartCoroutine(DoHeals(reelsResult.numAttacks, reelsResult.critical));
         }
-   else
-        StartCoroutine(DoAttacks(reelsResult.numAttacks,reelsResult.critical));
+        else
+        {
+            StartCoroutine(DoAttacks(reelsResult.numAttacks, reelsResult.critical));
+        }
     }
 
     IEnumerator DoHeals(int numHeals, bool crit)
