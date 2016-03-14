@@ -11,4 +11,4 @@ We made sure the dungeon walls would move after a battle has ended, where it was
 
 
 ![Alt text](https://github.com/Rarau/melailaandthedragon/blob/master/ScreenShots/a.png?raw=true"Slime")
-![Alt text](https://github.com/kt-chin/octet/blob/master/octet/assets/Screenshot.png?raw=true"Giant")
+![Alt text](https://github.com/Rarau/melailaandthedragon/blob/master/ScreenShots/b.png?raw=true"Giant")
